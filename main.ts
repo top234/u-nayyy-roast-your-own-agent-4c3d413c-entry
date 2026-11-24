@@ -12,6 +12,9 @@ function validateEntry(text: string): void {
   if (text.includes("\n") || text.includes("\r")) {
     throw new Error("entry must be a single line");
   }
+  if (/[\u0000-\u001F\u007F]/.test(text)) {
+    throw new Error("entry must not contain control characters");
+  }
   if (text.trim().length === 0) {
     throw new Error("entry must not be blank");
   }
